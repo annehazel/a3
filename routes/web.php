@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/bill', 'BillController@index');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
