@@ -16,5 +16,17 @@ class BillController extends Controller
         
     }
     
+    
+    public function setDefaults(){
+        
+        
+        dump(config('bill.defaultNumberOfPeople'));
+        
+    }
+        
+        
+        
+    
+    
   
 }
