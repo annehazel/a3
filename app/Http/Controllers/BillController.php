@@ -6,25 +6,36 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
+
     
     /*
      *
     */
     public function index(){
         
-        Return 'Making first controller';
+        return 'Making first controller';
         
     }
+
     
-    
+    /*
+     *
+    */    
     public function setDefaults(){
-        
-        
+                
         dump(config('bill.defaultNumberOfPeople'));
         
     }
+
+    
+    /*
+     *
+    */    
+    public function show(){
         
-        
+        return view('show');
+    
+    }   
         
     
     
