@@ -13,7 +13,7 @@
     <form method="get" action="/">
     <!--textbox, type of number-->
         <div class="form-group">
-            <label for="subtotal" >Bill total (subtotal)<span class="required">*</span>:</label><br/>
+            <label for="subtotal" >Bill total (subtotal)<span class="required" value= "{{ $subtotal or 0 }}">*</span>:</label><br/>
             <input type="number" step="0.01" id="subtotal" name="subtotal" value="" /><br/>
         </div>
             

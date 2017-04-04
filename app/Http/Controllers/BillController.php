@@ -35,10 +35,17 @@ class BillController extends Controller
         
         $subtotal = $request->input('subtotal');
         $tip = $request->input('tip');
-        $round = $request->input('round');
-        $people = $people->input('people');
+        $round = $request->has('round');
+        $people = $request->input('people');
         
-        return view('calculate');
+        dump($subtotal);
+        
+        return view('calculate')->with([
+        'subtotal' => $subtotal,
+        'tip' => $tip,
+        'round' => $round,
+        'people' => $people
+        ]);
     
     }   
         
