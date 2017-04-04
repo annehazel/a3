@@ -1,0 +1,14 @@
+/*
+ *CSS for assignment A2
+ *2017, dynamic web applications
+ *Anne Hazel
+ **/
+
+.required {
+    color: red;
+    
+}
+
+p {
+    margin-bottom: 3em; 
+}

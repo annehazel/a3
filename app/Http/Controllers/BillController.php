@@ -31,9 +31,14 @@ class BillController extends Controller
     /*
      *
     */    
-    public function show(){
+    public function calculate(Request $request){
         
-        return view('show');
+        $subtotal = $request->input('subtotal');
+        $tip = $request->input('tip');
+        $round = $request->input('round');
+        $people = $people->input('people');
+        
+        return view('calculate');
     
     }   
         

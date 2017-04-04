@@ -2,13 +2,9 @@
 
 
 
-Route::get('/', 'BillController@show');
+Route::get('/', 'BillController@calculate');
 
 
-/*
- * Testing custom config file
- */
-Route::get('/bill/defaults' , 'BillController@setDefaults');
 
 
 
