@@ -14,7 +14,16 @@
     <!--textbox, type of number-->
         <div class="form-group">
             <label for="subtotal" >Bill total (subtotal)<span class="required" value= "">*</span>:</label><br/>
-            <input type="number" step="0.01" id="subtotal" name="subtotal" value="{{ $subtotal or 0 }}" /><br/>
+            <input type="number" step="0.01" id="subtotal" name="subtotal" value="{{ $subtotal or null }}" /><br/>
+            
+            @if($errors->get('subtotal'))
+                <ul>
+                    @foreach($errors->get('subtotal') as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            
         </div>
             
         <!--dropdown -->
@@ -27,6 +36,15 @@
                 <option value=.20 {{ ($tip==.20) ? 'selected' : null }}>20%</option>
                 <option value=.25 {{ ($tip==.25) ? 'selected' : null }}>25%</option>
             </select>
+                
+            @if($errors->get('tip'))
+                <ul>
+                    @foreach($errors->get('tip') as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif                
+                
             <br/>
         </div>            
             
@@ -41,11 +59,38 @@
         <div class="form-group">
             <label for="people" >The check should be split between how many people?<span class="required">*</span></label><br/>
             <input type="number" id="people" name="people" value="{{ $people or null }}"/><br/>
+            
+            @if($errors->get('people'))
+                <ul>
+                    @foreach($errors->get('people') as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif            
+            
         </div>
         
         <input type="submit" class="btn">   
         
     </form>
+        
+        
+    @if($subtotal != null)
+        
+        @if($round)
+        <p>After including the tip and rounding up the bill to the nearest dollar, the total is ${{$total}}.00.
+           Each of the {{$people}} people owes ${{$amountDue}}.</p>
+        
+        @else
+        <p>After including the tip, the total is ${{$total}}.
+           Each of the {{$people}} people owes ${{$amountDue}}.</p>
+        
+        @endif
+        
+    @endif
+    
+    
+    
         
 @endsection
 

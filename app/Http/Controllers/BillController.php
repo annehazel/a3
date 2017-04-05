@@ -7,23 +7,25 @@ use Illuminate\Http\Request;
 class BillController extends Controller
 {
 
-    
-    /*
-     *
-    */
-    public function index(){
         
-        return 'Making first controller';
-        
-    }
-
-    
-
     
     /*
      *
     */    
     public function calculate(Request $request){
+        
+        if ($_GET){
+            $this->validate($request, [
+            
+                'subtotal' => 'required',                       
+                'tip' => 'required',
+                'people' => 'required'
+                
+            ]);
+    
+        }
+        
+        
         
         // Retrieve input from form submission / GET request
         $subtotal = $request->input('subtotal');
@@ -31,23 +33,38 @@ class BillController extends Controller
         $round = $request->has('round');
         $people = $request->input('people');
         
-        // Perform simple calculatiosn for $total and $maxpeople
-        $total = $this->getTotal($subtotal, $tip, $round);
-        $maxPeople = $total*100 +1;
+        if($subtotal >.01){
+            // Perform simple calculatiosn for $total and $maxpeople
+            $total = $this->getTotal($subtotal, $tip, $round);
+            $maxPeople = $total*100 +1;
+            
+            dump($total);
+            dump($maxPeople);
+            
+            $amountDue = $this->splitCheck($total, $people);
+            dump($amountDue);
+            
+            
+            return view('calculate')->with([
+            'subtotal' => $subtotal,
+            'tip' => $tip,
+            'round' => $round,
+            'people' => $people,
+            'total' => $total,
+            'amountDue' => $amountDue
+            ]);
+        } else{
+            
+            return view('calculate')->with([
+            'subtotal' => $subtotal,
+            'tip' => $tip,
+            'round' => $round,
+            'people' => $people,
+            ]);
+            
+            
+        }
         
-        dump($total);
-        dump($maxPeople);
-        
-        $amountDue = $this->splitCheck($total, $people);
-        dump($amountDue);
-        
-        
-        return view('calculate')->with([
-        'subtotal' => $subtotal,
-        'tip' => $tip,
-        'round' => $round,
-        'people' => $people
-        ]);
     
     }
     
@@ -56,10 +73,10 @@ class BillController extends Controller
     function getTotal($subtotal, $tip, $round = false) {
     
         $total = $subtotal * (1+$tip);
-        $total = ceil($total);
+        $total = round($total, 2);
         
         if ($round){
-            $total = round($total);
+            $total = ceil($total);
             return $total;
         }
           
