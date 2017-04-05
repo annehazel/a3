@@ -18,14 +18,6 @@ class BillController extends Controller
     }
 
     
-    /*
-     *
-    */    
-    public function setDefaults(){
-                
-        dump(config('bill.defaultNumberOfPeople'));
-        
-    }
 
     
     /*
@@ -33,12 +25,18 @@ class BillController extends Controller
     */    
     public function calculate(Request $request){
         
+        // Retrieve input from form submission / GET request
         $subtotal = $request->input('subtotal');
         $tip = $request->input('tip');
         $round = $request->has('round');
         $people = $request->input('people');
         
-        dump($subtotal);
+
+        
+        
+        
+        
+        
         
         return view('calculate')->with([
         'subtotal' => $subtotal,
