@@ -93,7 +93,7 @@
     @if($subtotal != null)
         <div class="resultsBox">
             @if($round)
-            <p>After including the tip and rounding up the bill to the nearest dollar, the total is ${{$total}}.00.
+            <p>After including the tip and rounding up the bill to the nearest dollar, the total is ${{$total}}.
                Each of the {{$people}} people owes ${{$amountDue}}.</p>
             
             @else

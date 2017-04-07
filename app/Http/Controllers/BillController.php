@@ -73,10 +73,13 @@ class BillController extends Controller
         
         if ($round){
             $total = ceil($total);
-            return $total;
+            return number_format($total, 2);
+        } else{
+            
+            return number_format($total, 2);
+        
         }
-          
-        return $total;
+
 
     } # end function getTotal
         
@@ -85,12 +88,26 @@ class BillController extends Controller
     function splitCheck($total, $people) {
 
         $amountDue = $total/$people;
-        $amountDue = round($amountDue, 2, PHP_ROUND_HALF_UP);
+        $amountDue = $this->roundUp($amountDue, 2);
         
-        return $amountDue;
+        return number_format($amountDue, 2);
     
     } # end function splitCheck
     
+    
+    # function from http://php.net/manual/en/function.ceil.php
+    # steve_phpnet // nanovox \\ com
+    
+    
+    function roundUp($value, $places=0) {
+        
+        if ($places < 0) {
+            $places = 0;
+            }
+        $mult = pow(10, $places);
+        
+        return ceil($value * $mult) / $mult;
+    }
     
   
 }
