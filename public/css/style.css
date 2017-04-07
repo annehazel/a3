@@ -9,15 +9,20 @@
 }
 
 .resultsBox {
-   
+    margin-top: 2em;
+    padding: 1em;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #666666;
+
     
 }
 
 form {
-  padding: 2em;
-  border-radius: 25px;
-  border: thin;
-  background-color: #efeff5;
+    padding: 2em;
+    border-radius: 15px;
+    border: thin;
+    background-color: #f2f2f2;
   
 }
 

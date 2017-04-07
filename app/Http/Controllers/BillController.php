@@ -5,14 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
+
 {
 
         
     
     /*
-     *
-    */    
+     * GET
+     * Function that validates the form submission and calculates the amount
+     * due for each person, always making sure the bill is paid over overpaid
+    */
+    
     public function calculate(Request $request){
+        
+        /* Check if the form has been submitted via GET, then validate
+         * 
+         * Input fields in form were purposely not created as number fields in order
+         * to test the validation
+        */
         
         if ($_GET){
             $this->validate($request, [
@@ -22,8 +32,9 @@ class BillController extends Controller
                 'people' => 'required|numeric',
                 
             ]);
+            
+            
 
-    
         }
         
         
@@ -34,13 +45,14 @@ class BillController extends Controller
         $people = $request->input('people');
         
         if($subtotal >.01){
+            
             // Perform simple calculatiosn for $total and $maxpeople
             $total = $this->getTotal($subtotal, $tip, $round);
             $maxPeople = $total*100 +1;
             
             $amountDue = $this->splitCheck($total, $people);
             
-            
+            // return view WITH all variavles (including calculated variables)
             return view('calculate')->with([
             'subtotal' => $subtotal,
             'tip' => $tip,
@@ -51,6 +63,7 @@ class BillController extends Controller
             ]);
         } else{
             
+            // return view WITHOUT all variavles (including calculated variables)
             return view('calculate')->with([
             'subtotal' => $subtotal,
             'tip' => $tip,
@@ -97,7 +110,7 @@ class BillController extends Controller
     
     # function from http://php.net/manual/en/function.ceil.php
     # steve_phpnet // nanovox \\ com
-    
+    # in place to always round up when splitting the check and assigning $amountDue
     
     function roundUp($value, $places=0) {
         
@@ -107,7 +120,8 @@ class BillController extends Controller
         $mult = pow(10, $places);
         
         return ceil($value * $mult) / $mult;
-    }
+    
+    } # end function roundUp
     
   
 }
