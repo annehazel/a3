@@ -9,7 +9,7 @@
 @section('introContent')
     <h1>Bill Calculator</h1>
     <p>Use the calculator below to figure out how much money each person owes in order to pay the check.</p>
-@endsection  // END introContent  
+@endsection  /*END introContent*/
 
 
 
@@ -116,5 +116,5 @@
     @endif
     
         
-@endsection // END content
+@endsection /*END content*/
 
