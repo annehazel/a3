@@ -13,30 +13,21 @@
 </head>
 	
 <body>
-
-
-
 	
 	<div class="container">
 		<div class="col-md-8">
-		
-		<header>
-			<img
-			src='http://making-the-internet.s3.amazonaws.com/laravel-foobooks-logo@2x.png'
-			style='width:300px'
-			alt='Foobooks Logo'>
-		</header>
-	
-		<section>
-			@yield('content')
-		</section>
+			
+			<section>
+				@yield('introContent')
+			</section>
 
-	
-		<footer>
-			&copy; {{ date('Y') }}
-		</footer>
-	
+			
+		<section>
+				@yield('content')
+			</section>
+
 		</div>
+			
 	</div>
 		
 

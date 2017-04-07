@@ -1,14 +1,26 @@
 /*
- *CSS for assignment A2
+ *CSS for assignment A3
  *2017, dynamic web applications
  *Anne Hazel
  **/
 
 .required {
-    color: red;
+    color: red;  
+}
+
+.resultsBox {
+   
     
 }
 
+form {
+  padding: 2em;
+  border-radius: 25px;
+  border: thin;
+  background-color: #efeff5;
+  
+}
+
 p {
-    margin-bottom: 3em; 
+    margin-bottom: 1em; 
 }

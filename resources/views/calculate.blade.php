@@ -6,22 +6,29 @@
 @endsection
 
 
-@section('content')
+@section('introContent')
     <h1>Bill Calculator</h1>
-    
-    
+    <p>Use the calculator below to figure out how much money each person owes in order to pay the check.</p>
+@endsection    
+
+
+@section('content')    
     <form method="get" action="/">
     <!--textbox, type of number-->
         <div class="form-group">
             <label for="subtotal" >Bill total (subtotal)<span class="required" value= "">*</span>:</label><br/>
-            <input type="number" step="0.01" id="subtotal" name="subtotal" value="{{ $subtotal or null }}" /><br/>
+            <input type="text" step="0.01" id="subtotal" name="subtotal" value="{{ $subtotal or old('subtotal')}}" /><br/>
             
             @if($errors->get('subtotal'))
-                <ul>
-                    @foreach($errors->get('subtotal') as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                <div class='required'>
+                    <ul class="list-unstyled">
+                        @foreach($errors->get('subtotal') as $error)
+                        <li>
+                        {{ $error }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
             
         </div>
@@ -38,11 +45,15 @@
             </select>
                 
             @if($errors->get('tip'))
-                <ul>
-                    @foreach($errors->get('tip') as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                <div class='required'>
+                    <ul class="list-unstyled">
+                        @foreach($errors->get('tip') as $error)
+                        <li>
+                        {{ $error }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif                
                 
             <br/>
@@ -51,42 +62,46 @@
         <!--checkbox -->
         <div class="form-group">
             <input type="checkbox" name="round" {{ ($round) ? 'CHECKED' : '' }}>
-            <label for="round">Yes, round the total (including the tip) up to the nearest whole dollar</label>
+            <label for="round">Yes, round the total (including the tip) up to the nearest whole dollar.</label>
             <br/>
         </div>
             
          <!--textbox, number -->
         <div class="form-group">
             <label for="people" >The check should be split between how many people?<span class="required">*</span></label><br/>
-            <input type="number" id="people" name="people" value="{{ $people or null }}"/><br/>
+            <input type="text" id="people" name="people" value="{{ $people or old('people') }}"/><br/>
             
             @if($errors->get('people'))
-                <ul>
-                    @foreach($errors->get('people') as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                <div class='required'>
+                    <ul class="list-unstyled">
+                        @foreach($errors->get('people') as $error)
+                        <li>
+                        {{ $error }}
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif            
             
         </div>
         
-        <input type="submit" class="btn">   
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Calculate Amount Due</button>   
         
     </form>
         
         
     @if($subtotal != null)
-        
-        @if($round)
-        <p>After including the tip and rounding up the bill to the nearest dollar, the total is ${{$total}}.00.
-           Each of the {{$people}} people owes ${{$amountDue}}.</p>
-        
-        @else
-        <p>After including the tip, the total is ${{$total}}.
-           Each of the {{$people}} people owes ${{$amountDue}}.</p>
-        
-        @endif
-        
+        <div class="resultsBox">
+            @if($round)
+            <p>After including the tip and rounding up the bill to the nearest dollar, the total is ${{$total}}.00.
+               Each of the {{$people}} people owes ${{$amountDue}}.</p>
+            
+            @else
+            <p>After including the tip, the total is ${{$total}}.
+               Each of the {{$people}} people owes ${{$amountDue}}.</p>
+            
+            @endif
+        </div>
     @endif
     
     

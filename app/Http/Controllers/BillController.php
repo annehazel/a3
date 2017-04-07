@@ -17,14 +17,14 @@ class BillController extends Controller
         if ($_GET){
             $this->validate($request, [
             
-                'subtotal' => 'required',                       
-                'tip' => 'required',
-                'people' => 'required'
+                'subtotal' => 'required|numeric',                       
+                'tip' => 'required|numeric',
+                'people' => 'required|numeric',
                 
             ]);
+
     
         }
-        
         
         
         // Retrieve input from form submission / GET request
@@ -38,11 +38,7 @@ class BillController extends Controller
             $total = $this->getTotal($subtotal, $tip, $round);
             $maxPeople = $total*100 +1;
             
-            dump($total);
-            dump($maxPeople);
-            
             $amountDue = $this->splitCheck($total, $people);
-            dump($amountDue);
             
             
             return view('calculate')->with([
@@ -59,7 +55,7 @@ class BillController extends Controller
             'subtotal' => $subtotal,
             'tip' => $tip,
             'round' => $round,
-            'people' => $people,
+            'people' => $people
             ]);
             
             
