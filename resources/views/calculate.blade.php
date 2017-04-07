@@ -19,8 +19,8 @@
     
         <!--textbox -->
         <div class="form-group">
-            <label for="subtotal" >Bill total (subtotal)<span class="required" value= "">*</span>:</label><br/>
-            <input type="text" step="0.01" id="subtotal" name="subtotal" value="{{ $subtotal or old('subtotal')}}" /><br/>
+            <label for="subtotal" >Bill total (subtotal)<span class="required">*</span>:</label><br/>
+            <input type="text" id="subtotal" name="subtotal" value="{{ $subtotal or old('subtotal')}}" /><br/>
             
             <!-- Display validation errors -->
             @if($errors->get('subtotal'))
