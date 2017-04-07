@@ -18,12 +18,7 @@
 		<div class="col-md-8">
 			
 			<section>
-				@yield('introContent')
-			</section>
-
-			
-		<section>
-				@yield('content')
+					@yield('content')
 			</section>
 
 		</div>
